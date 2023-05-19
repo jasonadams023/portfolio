@@ -1,12 +1,9 @@
-import Skills from './skills';
-import Navbar from './navbar';
-import Header from './header';
-import Portfolio from './portfolio';
-import About from './about';
-
-function Contact() {
-  return null;
-}
+import Skills from './components/skills';
+import Navbar from './components/navbar';
+import Header from './components/header';
+import Portfolio from './components/portfolio';
+import About from './components/about';
+import Contact from './components/contact';
 
 export default function Home() {
   return (
