@@ -1,7 +1,7 @@
 import Skills from './components/skills/skills';
 import Navbar from './components/navbar/navbar';
 import Header from './components/header/header';
-import Portfolio from './components/portfolio';
+import Portfolio from './components/portfolio/portfolio';
 import About from './components/about';
 import Contact from './components/contact';
 
