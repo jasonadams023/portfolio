@@ -1,0 +1,16 @@
+.about {
+  div {
+    text-align: center;
+  }
+
+  span, ul {
+    display: inline-block;
+    vertical-align: top;
+    width: 15rem;
+    margin: 2rem;
+  }
+
+  li {
+    margin: 1rem;
+  }
+}
