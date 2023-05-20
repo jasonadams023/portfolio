@@ -1,3 +1,15 @@
 .header {
-    margin-top: 10rem;
+    padding-top: 8rem;
+    background-color: #007acc;
+    color: white;
+    height: 18rem;
+    text-align: center;
+
+    .name {
+        font-size: 3rem;
+    }
+
+    .role {
+        font-size: 1.3rem;
+    }
 }
