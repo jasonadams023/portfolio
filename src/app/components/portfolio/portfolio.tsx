@@ -1,58 +1,91 @@
 'use client';
 
 import styles from './portfolio.module.scss';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import ProjectSummary from './project-summary/project-summary';
+import ExtendedDescription from './extended-description/extended-description';
+
+interface Project {
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+  link: string;
+}
+
+const projects: Project[] = [
+  {
+    title: 'Guildlands',
+    shortDescription: 'Browser based game',
+    longDescription: 'Guildlands is a browser based web game. Uses a time based turn system and focuses on group management. Features a crafting system and live economy.',
+    link: 'https://github.com/jasonadams023/guildlands',
+  },
+  {
+    title: 'Crazy Cab',
+    shortDescription: 'Mobile game',
+    longDescription: 'Mobile app built using Unity at the 2018 ThoughtWorks Game Jam.',
+    link: 'https://github.com/Cabby-Coders',
+  },
+  {
+    title: 'Tic Tac Toe',
+    shortDescription: 'Tic Tac Toe implemented with React',
+    longDescription: 'Tic Tac Toe app created using React and Redux.',
+    link: 'https://github.com/jasonadams023/tic_tac_toe',
+  },
+  {
+    title: 'Cookie Quest',
+    shortDescription: 'Experimental game utilizing cookies',
+    longDescription: 'Experimental project using cookies and a state machine to play a game.',
+    link: 'https://github.com/jasonadams023/cookie-quest-api',
+  },
+  {
+    title: 'E-commerce',
+    shortDescription: 'E-commerce template',
+    longDescription: 'An e-commerce template. Has admin functionality for setting and managing inventory and orders. Uses Swipe for handling purchases.',
+    link: 'https://github.com/jasonadams023/e_commerce',
+  },
+  {
+    title: 'Movie Reviews',
+    shortDescription: 'Movie review site',
+    longDescription: 'Movie database project. Uses omdb api to gather information. Stores user data and reviews in PostgreSQL database.',
+    link: 'https://github.com/jasonadams023/omdb-api-project',
+  },
+]
 
 export default function Portfolio() {
   const [displayContent, setDisplayContent] = useState(false);
+  const [longDescription, setLongDescription] = useState('');
+  const [link, setLink] = useState('');
 
-  let extendedContent = null;
-  if (displayContent) {
-    extendedContent = (
-      <div>
-        <p>Guildlands is a browser based web game. Uses a time based turn system and focuses on group management.
-          Features a crafting system and live economy.</p>
-        <a href="https://github.com/jasonadams023/guildlands">GitHub</a>
-      </div>
+  function onClick(newDescription: string, newLink: string): void {
+    if (displayContent && newDescription === longDescription) {
+      setDisplayContent(false);
+    } else {
+      setDisplayContent(true);
+      setLongDescription(newDescription);
+      setLink(newLink);
+    }
+  }
+
+  const projectSummaries = projects.map((project) => {
+    return (
+      <ProjectSummary
+        key={project.title}
+        title={project.title}
+        shortDescription={project.shortDescription}
+        callback={() => onClick(project.longDescription, project.link)}
+      />
     );
-  }
-
-  function onClick() {
-    setDisplayContent(!displayContent);
-  }
+  });
 
   return (
     <section id="portfolio" className={styles.portfolio}>
       <h2>Portfolio</h2>
 
       <ul>
-        <li>
-          <h3 onClick={onClick}>Guildlands</h3>
-          <p>Browser based game</p>
-        </li>
-        <li>
-          <h3>Crazy Cab</h3>
-          <p>Mobile game</p>
-        </li>
-        <li>
-          <h3>Tic Tac Toe</h3>
-          <p>Tic Tac Toe implemented with React</p>
-        </li>
-        <li>
-          <h3>Cookie Quest</h3>
-          <p>Experimental game utilizing cookies</p>
-        </li>
-        <li>
-          <h3>E-commerce</h3>
-          <p>E-commerce template</p>
-        </li>
-        <li>
-          <h3>Movie Reviews</h3>
-          <p>Movie review site</p>
-        </li>
+        {projectSummaries}
       </ul>
 
-      {extendedContent}
+      { displayContent ? (<ExtendedDescription longDescription={longDescription} link={link} />) : null }
     </section>
   );
 }
